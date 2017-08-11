@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const HTMLWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 module.exports = {
     entry: {
         bundle: './src/index.js',
@@ -9,6 +10,24 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: '[name].[chunkhash:8].js'
+    },
+    devServer:{
+        stats: {
+        colors: true,
+        hash: false,
+        version: false,
+        timings: false,
+        assets: false,
+        chunks: false,
+        modules: false,
+        reasons: false,
+        children: false,
+        source: false,
+        errors: false,
+        errorDetails: false,
+        warnings: false,
+        publicPath: false
+      }
     },
     module:{
         rules:[
@@ -28,7 +47,6 @@ module.exports = {
             name: ["vendor",'manifest']
         }),
         new HTMLWebpackPlugin({
-            inlineSource:'.js$',
             template: './src/index.html'
         })
     ]
