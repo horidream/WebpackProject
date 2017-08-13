@@ -47,7 +47,12 @@ module.exports = {
             name: ["vendor",'manifest']
         }),
         new HTMLWebpackPlugin({
+            inlineSource: '.(js|css)$',
             template: './src/index.html'
+        })
+        , new HTMLWebpackInlineSourcePlugin()
+        , new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
         })
     ]
 };
